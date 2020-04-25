@@ -1,5 +1,7 @@
 # 2019-nCoV 疫情实时动态
 
+[![](https://img.shields.io/badge/Author-woodwhales-green.svg)](https://woodwhales.cn/) ![](https://img.shields.io/badge/License-GPL%203.0-orange.svg)
+ 
 > https://fivecoder.com/2019-ncov/
 
 ## 运行指南
