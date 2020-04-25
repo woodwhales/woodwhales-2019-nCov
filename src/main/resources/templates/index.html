@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>2019-nCoV 疫情实时动态</title>
+<link rel="stylesheet" href="./webjars/layui/css/layui.css">
+<link rel="stylesheet" href="./css/global.css">
+<link rel="stylesheet" href="./css/style.css">
+<link rel="stylesheet" href="./css/my-css.css">
+</head>
+<body>
+	<div th:replace="~{common::header}"></div>
+	<div class="alone-banner" style="background-image: url(./2019-ncov.png); background-size: 195px 195px; background-position: 3% 50%; background-repeat: no-repeat;">
+		<div class="layui-main">
+			<h1>Novel coronavirus (SARS-CoV-2)<br/>严重急性呼吸系统综合征冠状病毒2</h1>
+			<p class="layui-hide-xs">
+				Severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2) <br />is the virus strain that causes coronavirus disease 2019 (COVID-19), <br />a respiratory illness. It is colloquially known as the coronavirus,<br />and was previously referred to by its provisional name 2019 novel coronavirus (2019-nCoV).
+			</p>
+			<p>
+			    严重急性呼吸系统综合征冠状病毒2（英语：Severe acute respiratory syndrome coronavirus 2，缩写：SARS-CoV-2）<br />是一种具有包膜的正链单股RNA病毒，属于冠状病毒科乙型冠状病毒属严重急性呼吸道综合征相关冠状病毒种。<br />它的基因序列和SARS病毒及MERS病毒属于同一谱系但不同进化枝，是已知的第七种可感染人类的冠状病毒。<br />病毒的宿主包括哺乳动物和禽类动物，它造成了于2019年底暴发的2019冠状病毒病（COVID-19）。
+			</p>
+			<p>https://en.wikipedia.org/wiki/Novel_coronavirus_(2019-nCoV)</p>
+			<br />
+		</div>
+	</div>
+	<div class="layui-main alone-items">
+		<fieldset class="layui-elem-field layui-field-title">
+			<legend>国内实时数据</legend>
+		</fieldset>
+	</div>
+	<div class="layui-main alone-items">
+		<div class="layui-card">
+			<div class="layui-card-header" id="updateTime" th:utext="'更新至&nbsp;'+${domesticData.publishTime}"></div>
+			<div class="layui-card-body ">
+				<ul
+					class="layui-row layui-col-space10 layui-this x-admin-carousel x-admin-backlog">
+					<li class="layui-col-md3 layui-col-xs"><a href="javascript:;"
+						class="x-admin-backlog-body">
+							<h3>确诊病例</h3>
+							<p>
+								<span style="color: #e83132; font-size: 30px;" th:text="${domesticData.confirmed}">-</span>
+							</p>
+					</a></li>
+					<li class="layui-col-md3 layui-col-xs"><a href="javascript:;"
+						class="x-admin-backlog-body">
+							<h3>疑似病例</h3>
+							<p>
+								<span style="color: #ec9217; font-size: 30px;" th:text="${domesticData.suspected}">-</span>
+							</p>
+					</a></li>
+					<li class="layui-col-md3 layui-col-xs"><a href="javascript:;"
+						class="x-admin-backlog-body">
+							<h3>治愈病例</h3>
+							<p>
+								<span style="color: #10aeb5; font-size: 30px;" th:text="${domesticData.healed}">-</span>
+							</p>
+					</a></li>
+					<li class="layui-col-md3 layui-col-xs"><a href="javascript:;"
+						class="x-admin-backlog-body">
+							<h3>死亡病例</h3>
+							<p>
+								<span style="color: #4d5054; font-size: 30px;" th:text="${domesticData.dead}">-</span>
+							</p>
+					</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="layui-main alone-items">
+		<fieldset class="layui-elem-field layui-field-title">
+			<legend>国外实时数据</legend>
+		</fieldset>
+	</div>
+	<div class="layui-main alone-items">
+		<div class="layui-card">
+			<div class="layui-card-header" th:utext="'更新至&nbsp;'+${foreignData.publishTime}"></div>
+			<div class="layui-card-body ">
+				<ul
+					class="layui-row layui-col-space10 layui-this x-admin-carousel x-admin-backlog">
+					<li class="layui-col-md3 layui-col-xs"><a href="javascript:;"
+						class="x-admin-backlog-body">
+							<h3>确诊病例</h3>
+							<p>
+								<span style="color: #e83132; font-size: 30px;" th:text="${foreignData.confirmed}">-</span>
+							</p>
+					</a></li>
+					<li class="layui-col-md3 layui-col-xs"><a href="javascript:;"
+						class="x-admin-backlog-body">
+							<h3>疑似病例</h3>
+							<p>
+								<span style="color: #ec9217; font-size: 30px;" th:text="${foreignData?.suspected}?${foreignData?.suspected}:'-'">-</span>
+							</p>
+					</a></li>
+					<li class="layui-col-md3 layui-col-xs"><a href="javascript:;"
+						class="x-admin-backlog-body">
+							<h3>治愈病例</h3>
+							<p>
+								<span style="color: #10aeb5; font-size: 30px;" th:text="${foreignData.healed}">-</span>
+							</p>
+					</a></li>
+					<li class="layui-col-md3 layui-col-xs"><a href="javascript:;"
+						class="x-admin-backlog-body">
+							<h3>死亡病例</h3>
+							<p>
+								<span style="color: #4d5054; font-size: 30px;" th:text="${foreignData.dead}">-</span>
+							</p>
+					</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="layui-main alone-items">
+		<fieldset class="layui-elem-field layui-field-title">
+			<legend>国内实时新闻</legend>
+		</fieldset>
+		<div class="flow-default" id="domestic_news_id"></div>
+	</div>
+	<div class="layui-main alone-items">
+		<fieldset class="layui-elem-field layui-field-title">
+			<legend>国外实时新闻</legend>
+		</fieldset>
+		<div class="flow-default" id="foreign_news_id"></div>
+	</div>
+	<div th:replace="~{common::footer}"></div>
+	<script src="./webjars/layui/layui.js" charset="utf-8"></script>
+	<script type="text/javascript">
+	layui.use('flow', function(){
+	  	var flow = layui.flow,
+	  		$ = layui.jquery;
+	  	flow.load({
+		    elem: '#domestic_news_id' //流加载容器
+		    ,scrollElem: '#domestic_news_id' //滚动条所在元素，一般不用填，此处只是演示需要。
+		    ,isAuto: false
+		    ,isLazyimg: true
+		    ,done: function(page, next){ //加载下一页
+		      //模拟插入
+		        var lis = [];
+		        $.get('./news/list?type=DOMESTIC&page=' + page, function(res) {
+		        	layui.each(res.data, function(index, item) {
+						lis.push(getDivStr(item));
+					});
+			        next(lis.join(''), page < res.pages);
+		        });
+			}
+		});
+	  	
+	  	flow.load({
+		    elem: '#foreign_news_id' //流加载容器
+		    ,scrollElem: '#foreign_news_id' //滚动条所在元素，一般不用填，此处只是演示需要。
+		    ,isAuto: false
+		    ,isLazyimg: true
+		    ,done: function(page, next){ //加载下一页
+		      //模拟插入
+		        var lis = [];
+		        $.get('./news/list?type=FOREIGN&page=' + page, function(res) {
+		        	layui.each(res.data, function(index, item) {
+						lis.push(getDivStr(item));
+					});
+			        next(lis.join(''), page < res.pages);
+		        });
+			}
+		});
+	  	
+	  	var getDivStr = function(item) {
+			return '<div class="layui-card">'+
+			'<div class="layui-card-header"><b>'+ item.title + '</b></div>'+
+			'<div class="layui-card-body">'+
+			    '<p>'+ item.content +'</p>'+
+			    '<span style="color: #767d85;">发布时间：' + item.publishTime + '</span><br>'+
+			    '<span style="color: #767d85;">来源：<a href="'+ item.fromUrl +'" style="color: #767d85;">'+ item.title + '（' + item.fromMedia + '）</a></span><br>'+
+			'</div>'+
+			'</div>';
+		}
+	
+	});
+	
+	</script>
+</body>
+</html>

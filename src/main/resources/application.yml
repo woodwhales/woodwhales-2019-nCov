@@ -1,0 +1,26 @@
+server:
+  address: 0.0.0.0
+  port: 8088
+  servlet:
+    context-path: /2019-ncov
+  tomcat:
+    basedir: ../tmp/
+logging:
+  config: classpath:logback-spring.xml
+
+app: 
+  production-name: "2019-noCoV 疫情实时动态"
+ 
+spring:
+  profiles:
+    active: ${env}
+  application: 
+    name: 2019-nCoV
+  thymeleaf:
+    cache: false
+#  datasource: 
+#    url: jdbc:mysql://127.0.0.1:3306/2019-ncov?serverTimezone=Asia/Shanghai&useUnicode=true&allowMultiQueries=true&characterEncoding=utf8&useSSL=false
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    # driver-class-name: com.mysql.jdbc.Driver
+#    username: root
+#    password: root
