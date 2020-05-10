@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.woodwhales.ncov.controller.params.NewsCreateParam;
 import org.woodwhales.ncov.controller.params.NewsDeleteParam;
+import org.woodwhales.ncov.controller.params.NewsQueryParam;
 import org.woodwhales.ncov.controller.params.NewsUpdateParam;
 import org.woodwhales.ncov.controller.vo.BaseVO;
 import org.woodwhales.ncov.controller.vo.PageVO;
@@ -31,11 +32,13 @@ public class NewsController {
 
 	@GetMapping("/list")
 	public PageVO<NewsDTO> pageNews(@RequestParam(name="page", defaultValue="1") long page, 
-			@RequestParam(name="limit", defaultValue="5") long limit, @RequestParam(name="type", defaultValue="DOMESTIC") String type) {
+			@RequestParam(name="limit", defaultValue="5") long limit,
+			@RequestParam(name="type", defaultValue="DOMESTIC") String type,
+			NewsQueryParam newsQueryParam) {
 		
 		NewsTypeEnum newsTypeEnum = NewsTypeEnum.valueOf(type);
 		
-		PageDTO<NewsDTO> pageResult = newsService.pageNews(page, limit, newsTypeEnum);
+		PageDTO<NewsDTO> pageResult = newsService.pageNews(page, limit, newsTypeEnum, newsQueryParam);
 		PageVO<NewsDTO> pageVO = new PageVO<NewsDTO>();
 		pageVO.setCode(0);
 		pageVO.setMsg(StringUtils.EMPTY);

@@ -35,19 +35,13 @@
                 <div class="layui-col-md12">
                     <div class="layui-card">
                         <div class="layui-card-body ">
-                            <form class="layui-form layui-col-space5">
+                            <form class="layui-form layui-col-space5" onsubmit="return false;">
                                 <div class="layui-inline layui-show-xs-block">
-                                    <input class="layui-input"  autocomplete="off" placeholder="开始日" name="start" id="start">
+                                    <input type="text" name="title" id="title" placeholder="请输入新闻名" autocomplete="off" class="layui-input">
                                 </div>
-                                <div class="layui-inline layui-show-xs-block">
-                                    <input class="layui-input"  autocomplete="off" placeholder="截止日" name="end" id="end">
-                                </div>
-                                <div class="layui-inline layui-show-xs-block">
-                                    <input type="text" name="username"  placeholder="请输入用户名" autocomplete="off" class="layui-input">
-                                </div>
-                                <div class="layui-inline layui-show-xs-block">
-                                    <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
-                                </div>
+	                             <div class="layui-inline layui-show-xs-block">
+	                                 <button class="layui-btn" onclick="search();"><i class="layui-icon">&#xe615;</i></button>
+	                             </div>
                             </form>
                         </div>
                         <div class="layui-card-body ">
@@ -91,6 +85,18 @@
 	            ,{fixed: 'right', title:'操作', toolbar: '#tableBar', width: 190}
 	          ]]
       	});
+        
+        var search = function() {
+        	table.reload('tableInfo', {
+                where: { //设定异步数据接口的额外参数，任意设
+                    'title': $('#title').val()
+                    // …
+                  }
+                  ,page: {
+                    curr: 1 //重新从第 1 页开始
+                  }
+            });
+        }
 
       	//监听行工具事件
         table.on('tool(tableInfo-filter)', function(obj){
@@ -105,19 +111,23 @@
         	
         });
       	
-      	var reloadTable = function() {
-      		table.reload('tableInfo', {
-      			where: { //设定异步数据接口的额外参数，任意设
-      				//aaaaaa: 'xxx'
-      			    //,bbb: 'yyy'
-      			    // …
-      			  }
-      			  ,page: {
-  			      	curr: 1 //重新从第 1 页开始
-  			  	  }
-      		});
-      	}
-      	
+        form.on('submit(sreach)', function () {
+            //执行重载
+            reloadTable();
+        });
+        
+        var reloadTable = function() {
+            table.reload('tableInfo', {
+                where: { //设定异步数据接口的额外参数，任意设
+                    'title': $('#title').val()
+                    // …
+                  }
+                  ,page: {
+                    curr: 1 //重新从第 1 页开始
+                  }
+            });
+        }
+        
       });
       
 	var postAjax = function(postUrl, postData) {

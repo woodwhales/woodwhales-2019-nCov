@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import org.woodwhales.ncov.controller.params.NewsCreateParam;
+import org.woodwhales.ncov.controller.params.NewsQueryParam;
 import org.woodwhales.ncov.controller.params.NewsUpdateParam;
 import org.woodwhales.ncov.dto.BaseDTO;
 import org.woodwhales.ncov.dto.NewsDTO;
@@ -34,8 +35,9 @@ public class NewsServiceImpl implements NewsService {
 	private NewsRepository newsRepository;
 
 	@Override
-	public PageDTO<NewsDTO> pageNews(long current, long size, NewsTypeEnum newsTypeEnum) {
+	public PageDTO<NewsDTO> pageNews(long current, long size, NewsTypeEnum newsTypeEnum, NewsQueryParam newsQueryParam) {
 		LambdaQueryWrapper<News> queryWrapper = Wrappers.<News>lambdaQuery()
+														.like(StringUtils.isNotBlank(newsQueryParam.getTitle()), News::getTitle, newsQueryParam.getTitle())
 														.eq(News::getNewsType, newsTypeEnum.getTypeValue())
 														.orderByDesc(News::getPublishTime);
 		Page<News> page = new Page<News>(current, size);

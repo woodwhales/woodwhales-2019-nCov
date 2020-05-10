@@ -34,16 +34,10 @@
             <div class="layui-row layui-col-space15">
                 <div class="layui-col-md12">
                     <div class="layui-card">
-                        <div class="layui-card-body ">
-                            <form class="layui-form layui-col-space5">
+                        <div class="layui-card-body">
+                            <form class="layui-form layui-col-space5" onsubmit="return false;">
                                 <div class="layui-inline layui-show-xs-block">
-                                    <input class="layui-input"  autocomplete="off" placeholder="开始日" name="start" id="start">
-                                </div>
-                                <div class="layui-inline layui-show-xs-block">
-                                    <input class="layui-input"  autocomplete="off" placeholder="截止日" name="end" id="end">
-                                </div>
-                                <div class="layui-inline layui-show-xs-block">
-                                    <input type="text" name="username"  placeholder="请输入用户名" autocomplete="off" class="layui-input">
+                                    <input type="text" name="title" id="title" placeholder="请输入新闻名" autocomplete="off" class="layui-input">
                                 </div>
                                 <div class="layui-inline layui-show-xs-block">
                                     <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
@@ -104,11 +98,16 @@
          	}
         });
       	
+        form.on('submit(sreach)', function () {
+            //执行重载
+            reloadTable();
+            return false;
+        });
+      	
       	var reloadTable = function() {
       		table.reload('tableInfo', {
       			where: { //设定异步数据接口的额外参数，任意设
-      				//aaaaaa: 'xxx'
-      			    //,bbb: 'yyy'
+      			    'title': $('#title').val()
       			    // …
       			  }
       			  ,page: {
